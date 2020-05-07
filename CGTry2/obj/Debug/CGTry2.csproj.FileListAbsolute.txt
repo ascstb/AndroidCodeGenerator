@@ -1,0 +1,12 @@
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/CGTry2/CGTry2/bin/CGTry2.dll
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/CGTry2/CGTry2/bin/CGTry2.pdb
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/CGTry2/CGTry2/obj/Debug/CGTry2.csprojAssemblyReference.cache
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/CGTry2/CGTry2/obj/Debug/CGTry2.csproj.CoreCompileInputs.cache
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/CGTry2/CGTry2/obj/Debug/CGTry2.dll
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/CGTry2/CGTry2/obj/Debug/CGTry2.pdb
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/AndroidCodeGenerator/CGTry2/bin/CGTry2.dll
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/AndroidCodeGenerator/CGTry2/bin/CGTry2.pdb
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/AndroidCodeGenerator/CGTry2/obj/Debug/CGTry2.csprojAssemblyReference.cache
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/AndroidCodeGenerator/CGTry2/obj/Debug/CGTry2.csproj.CoreCompileInputs.cache
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/AndroidCodeGenerator/CGTry2/obj/Debug/CGTry2.dll
+/Users/arturosanchez/Desktop/Project/VS/CGTry2/AndroidCodeGenerator/CGTry2/obj/Debug/CGTry2.pdb

@@ -1,0 +1,406 @@
+﻿<%@ Master Language="C#" Inherits="CGTry2.inc.master.Principal" %>
+<!DOCTYPE html>
+
+<html lang="es-mx">
+<head runat="server">
+    <meta charset="utf-8">
+    <link rel="icon" href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>img/Nova_favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title><%= System.Configuration.ConfigurationManager.AppSettings["NombreAplicacion"].ToString() %></title>
+
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/bootstrap.css" rel="stylesheet" />
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/animate.css" rel="stylesheet" />
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/style.css" rel="stylesheet" />
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/plugins/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/css/EstiloGeneral.css" rel="stylesheet" />
+
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/jquery-2.1.1.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/bootstrap.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/toastr/toastr.min.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/inspinia.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/pace/pace.min.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/js/handlebars-v4.0.5.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/js/Util.js"></script>
+
+    <script type="text/javascript">
+        //Navegaci髇
+        $(document).ready(function () {
+            var UrlActual = window.location.href;
+            var Enlaces = $("ul.nav.metismenu li.liMenuItem a");
+
+            if (UrlActual == $("#hdnUrlPrincipal").val() + "Principal.aspx") {
+                $("#liMenuItemHome").addClass("active");
+            }
+            else {
+                for (var i = 0; i < Enlaces.length; i++) {
+                    var Link = Enlaces[i];
+                    var UrlElemento = Link.href.replace("#", "");
+                    if (UrlActual == UrlElemento) {
+                        $(Link).parent().addClass('active');
+                        $(Link).parent().parent().addClass('in');
+                        $(Link).parent().parent().parent().addClass('active');
+                    }
+                }
+            }
+        });
+
+        $.fn.modal.Constructor.prototype.enforceFocus = $.noop;
+        var BarraNavegacionEstado = {
+            Normal: 0,
+            Minimizado: 1
+        };
+        var BarraNavegacionEstadoId = 0;
+
+        //Modal
+        $(document).ready(function () {
+            $('.modal').on('shown.bs.modal', function () {
+                //Make sure the modal and backdrop are siblings (changes the DOM)
+                $(this).before($('.modal-backdrop'));
+                //Make sure the z-index is higher than the backdrop
+                $(this).css("z-index", parseInt($('.modal-backdrop').css('z-index')) + 1);
+                $(this).find("input")[0].focus();
+            });
+        });
+
+        //Alertas
+        $(document).ready(function () {
+            //Opciones para mensajes
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-center",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "7000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        });
+
+        //Loading
+        $(document).ready(function () {
+
+            Pace.on("start", function () {
+                Pace.stop();
+            });
+            //Pace.stop();
+        });
+
+        //Barra de navegaci髇
+        $(document).ready(function () {
+            $("#btnMinimizarBarraNavegacion").click(function () {
+                BarraNavegacionGuardarEstado();
+            });
+
+            BarraNavegacionCargarEstado();
+        });
+
+        //DataTable
+        $(document).ready(function () {
+            $.extend(true, $.fn.dataTable.defaults, {
+                /*language: {
+                    sProcessing: "Procesando...",
+                    sLengthMenu: "Mostrar _MENU_  &nbsp; registros",
+                    sZeroRecords: "No se encontraron resultados",
+                    sEmptyTable: "Ning鷑 dato disponible en esta tabla",
+                    sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+                    sInfoPostFix: "",
+                    sSearch: "Buscar:",
+                    sUrl: "",
+                    sInfoThousands: ",",
+                    sLoadingRecords: "Cargando...",
+                    oPaginate: {
+                        "sFirst": "Primero",
+                        "sLast": "趌timo",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    oAria: {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },*/
+                pageLength: 10,
+                responsive: true,
+                //dom: 'Bfrtip',
+                dom: '<"html5buttons"B>lTfgitp',
+                //dom: 'BfTltip',
+                buttons: [
+                    {
+                        text: '<i class="fa fa-plus-circle"></i>Agregar',
+                        className: "btn-primary",
+                        action: function (e, dt, node, config) {
+                            $('#dvModal').modal('show');
+                        }
+                    },
+                    { extend: 'copy', text: '<i class="fa fa-files-o"></i>Copy' },
+                    { extend: 'excel', text: '<i class="fa fa-file-excel-o"></i>Excel' },
+                    { extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>PDF' },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i>Print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                        }
+                    }
+                ]
+            });
+        });
+
+        //HandleBars
+        $(document).ready(function () {
+            Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+                switch (operator) {
+                    case '!=':
+                        return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                    case '==':
+                        return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                    case '===':
+                        return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                    case '<':
+                        return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                    case '<=':
+                        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                    case '>':
+                        return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                    case '>=':
+                        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                    case '&&':
+                        return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                    case '||':
+                        return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                    default:
+                        return options.inverse(this);
+                }
+            });
+        });
+
+        //Session
+        var UsuarioId = 0
+        $(document).ready(function () {
+            UsuarioId = $("#hdnUsuarioId").val();
+        });
+
+        function BarraNavegacionCargarEstado() {
+            if (localStorage != undefined && localStorage != null
+                && localStorage.getItem("BarraNavegacionEstado") != undefined
+                && localStorage.getItem("BarraNavegacionEstado") != null) {
+                BarraNavegacionEstadoId = localStorage.getItem("BarraNavegacionEstado");
+            }
+
+            if (BarraNavegacionEstadoId == BarraNavegacionEstado.Minimizado) {
+                $("body").toggleClass("mini-navbar");
+                SmoothlyMenu();
+            }
+        }
+
+        function BarraNavegacionGuardarEstado() {
+            if (BarraNavegacionEstadoId == BarraNavegacionEstado.Normal) {
+                BarraNavegacionEstadoId = BarraNavegacionEstado.Minimizado;
+            }
+            else {
+                BarraNavegacionEstadoId = BarraNavegacionEstado.Normal;
+            }
+
+            localStorage.setItem("BarraNavegacionEstado", BarraNavegacionEstadoId);
+        }
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="wrapper">
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav metismenu" id="side-menu">
+                        <li class="nav-header">
+                            <div class="dropdown profile-element">
+                                <div class="text-center">
+                                    <asp:Image runat="server" ID="imgFoto"
+                                        ImageUrl="../../img/ProfilePictureless.png"
+                                        AlternateText="User" CssClass="img-circle" Height="48" />
+                                </div>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="clear">
+                                        <span class="block m-t-xs"><strong class="font-bold">
+                                            <asp:Label runat="server" ID="txtNombreUsuario" Text="User" /></strong>
+                                        </span>
+                                        <span class="text-muted text-xs block">
+                                            <i class="fa fa-gear"></i>Settings <b class="caret"></b>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="logo-element">
+                                <%= System.Configuration.ConfigurationManager.AppSettings["NombreAplicacionCorto"].ToString() %>
+                            </div>
+                        </li>
+                        <li id="liMenuItemHome" class="liMenuItem">
+                            <a href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
+                        </li>
+                        <li class="liMenuItem">
+                            <a><i class="fa fa-th-large"></i><span class="nav-label">Operations</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>Form/CodeGenerator/Android.aspx">Android Code Generator</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a id="btnMinimizarBarraNavegacion" class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><span class="fa fa-bars"></span></a>
+                        </div>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <span class="m-r-sm text-muted welcome-message">Welcome to <%= System.Configuration.ConfigurationManager.AppSettings["NombreAplicacion"].ToString() %></span>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-envelope"></i><span class="label label-warning">3</span>
+                                </a>
+                                <ul class="dropdown-menu animated fadeInDown dropdown-messages">
+                                    <li>
+                                        <div class="dropdown-messages-box">
+                                            <a href="#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>img/ProfilePictureless.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <small class="pull-right">1h ago</small>
+                                                <strong>Oscar Medina</strong> requires project progress for <strong>Projects Management</strong>.
+                                                <br>
+                                                <small class="text-muted">2016-Oct-24 03:21 pm</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="dropdown-messages-box">
+                                            <a href="#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>img/ProfilePictureless.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <small class="pull-right">1d ago</small>
+                                                <strong>Ladislado Guerra</strong> Has sent you a message.
+                                                <br>
+                                                <small class="text-muted">2016-Oct-23 10:15 am</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="dropdown-messages-box">
+                                            <a href="#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>img/ProfilePictureless.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <small class="pull-right">hace 3d</small>
+                                                <strong>Patricia Arreola</strong> has requested a new meeting.
+                                                <br>
+                                                <small class="text-muted">2016-Oct-21 12:37 pm</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="text-center link-block">
+                                            <a href="#">
+                                                <i class="fa fa-envelope fa-fw"></i><strong>Read all messages</strong>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-bell"></i><span class="label label-primary">2</span>
+                                </a>
+                                <ul class="dropdown-menu animated fadeInDown dropdown-alerts">
+                                    <li>
+                                        <a href="#">
+                                            <div>
+                                                <i class="fa fa-laptop fa-fw"></i>The app has been updated correctly
+                                                <span class="pull-right text-muted small">15 minutes ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="profile.html">
+                                            <div>
+                                                <i class="fa fa-files-o fa-fw"></i>Your application has been processed correctly
+                                                <span class="pull-right text-muted small">25 minutes ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="text-center link-block">
+                                            <a href="#">
+                                                <i class="fa fa-bell fa-fw"></i>
+                                                <strong>See all notifications</strong>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>Acceso/CerrarSesion.aspx">
+                                    <i class="fa fa-sign-out"></i>Log Out
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+                <div class="row border-bottom white-bg dashboard-header animated fadeInRight">
+                    <asp:ContentPlaceHolder ID="Encabezado" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <asp:ContentPlaceHolder ID="Contenido" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="footer">
+                    <asp:ContentPlaceHolder ID="PiePagina" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+        <!--UsuarioId-->
+        <asp:HiddenField ID="hdnUsuarioId" runat="server" />
+        <asp:HiddenField ID="hdnUrlPrincipal" runat="server" />
+    </form>
+</body>
+</html>
+
