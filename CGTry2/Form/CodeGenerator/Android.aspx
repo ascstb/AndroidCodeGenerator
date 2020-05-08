@@ -48,11 +48,11 @@
                     <label class="col-sm-2 control-label">Content Type:</label>
                     <div class="col-sm-10">
                         <div class="radio radio-success radio-inline">
-                            <input type="radio" name="rblContentType" id="rblContentTypeActivities" value="0" />
+                            <input type="radio" name="rblContentType" id="rblContentTypeActivities" value="1" />
                             <label for="rblContentTypeActivities">Activities</label>
                         </div>
                         <div class="radio radio-danger radio-inline">
-                            <input type="radio" name="rblContentType" id="rblContentTypeFragments" value="1" />
+                            <input type="radio" name="rblContentType" id="rblContentTypeFragments" value="0" />
                             <label for="rblContentTypeFragments">Fragments</label>
                         </div>
                     </div>
