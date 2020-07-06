@@ -1,0 +1,105 @@
+﻿package {{packageName}}.presentation
+
+import android.os.Bundle
+import android.view.KeyEvent
+import android.view.Menu
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import {{packageName}}.R
+import {{packageName}}.core.Session
+import {{packageName}}.presentation.base.BaseFragmentListener
+import {{packageName}}.presentation.home.HomeFragment
+import {{packageName}}.presentation.navigation.Navigation
+import {{packageName}}.utils.wait
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.android.ext.android.inject
+import timber.log.Timber
+
+class MainActivity : AppCompatActivity(), BaseFragmentListener {
+    private val navigation by inject<Navigation>()
+    private lateinit var navView: BottomNavigationView
+    private lateinit var toolbar: Toolbar
+    private var enableExit: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.d("MainActivity_TAG: onCreate: ")
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        setNavView()
+
+        setToolbar()
+
+        if (Session.currentFragment == null) {
+            navigation.menuClicked(
+                activity = this,
+                menuTitle = Navigation.MenuTitle.HOME
+            )
+        } else {
+            navigation.loadCurrentFragment(this)
+        }
+    }
+
+    private fun setToolbar() {
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        toolbar.setOnMenuItemClickListener {
+            Timber.d("MainActivity_TAG: setToolbar: $it")
+            navigation.goToTools(
+                activity = this,
+                toolbarMenu =  Navigation.ToolbarMenu.fromTitle(it.title.toString())
+            )
+
+            return@setOnMenuItemClickListener true
+        }
+    }
+
+    private fun setNavView() {
+        navView = findViewById(R.id.nav_view)
+        navView.setOnNavigationItemSelectedListener {
+            Timber.d("MainActivity_TAG: onCreate: onNavigationItemSelected: $it")
+            navigation.menuClicked(
+                activity = this,
+                menuTitle = Navigation.MenuTitle.fromTitle(it.title.toString())
+            )
+
+            return@setOnNavigationItemSelectedListener true
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onFocused() {
+        Timber.d("MainActivity_TAG: onFocused: ")
+    }
+
+    override fun onClicked(fromFragment: Fragment, extras: Bundle?) {
+        Timber.d("MainActivity_TAG: onClicked:")
+        navigation.goToDetails(
+            activity = this,
+            fromFragment = fromFragment,
+            extras = extras
+        )
+    }
+
+    override fun onBackPressed() {
+        if (Session.currentFragment is HomeFragment) {
+            if (enableExit) {
+                finishAndRemoveTask()
+            } else {
+                enableExit = true
+                Toast.makeText(this, getString(R.string.exit_message), Toast.LENGTH_SHORT).show()
+                wait(3) {
+                    enableExit = false
+                }
+            }
+        } else {
+            super.onBackPressed()
+        }
+    }
+}

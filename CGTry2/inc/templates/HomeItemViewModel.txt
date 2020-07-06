@@ -1,0 +1,12 @@
+﻿package {{packageName}}.presentation.home
+
+import {{packageName}}.model.{{model}}
+import {{packageName}}.presentation.base.BaseViewModel
+
+class {{model}}ItemViewModel : BaseViewModel() {
+    var {{modelItemProperty}}: {{model}}? = null
+        set(value) {
+            field = value
+            notifyChange()
+        }
+}

@@ -1,0 +1,12 @@
+﻿package {{packageName}}.di
+
+import {{packageName}}.BuildConfig
+import {{packageName}}.repository.remote.ServerAPI
+import {{packageName}}.repository.remote.ServerRepository
+import {{packageName}}.repository.remote.ServerRepositoryImpl
+import org.koin.dsl.module
+
+val serviceModule = module {
+    single<ServerAPI> { createWebService(get(), BuildConfig.API_SERVER) }
+    single<ServerRepository> { ServerRepositoryImpl(get()) }
+}

@@ -1,0 +1,36 @@
+﻿package {{packageName}}.presentation.home
+
+import androidx.databinding.Bindable
+import androidx.databinding.library.baseAdapters.BR
+import {{packageName}}.model.{{model}}
+import {{packageName}}.presentation.base.BaseViewModel
+import {{packageName}}.repository.RepositoryResponse
+import {{packageName}}.repository.remote.ServerRepository
+import {{packageName}}.utils.runOnResult
+import timber.log.Timber
+
+class HomeViewModel(
+    private val repository: ServerRepository
+) : BaseViewModel() {
+
+    @get:Bindable
+    var {{modelProperty}} = emptyList<{{model}}>()
+        set(value) {
+            field = value
+            recyclerItemsViewModel = value.map { {{model}}ItemViewModel().apply { {{modelItemProperty}} = it } }.toMutableList()
+            notifyPropertyChanged(BR.{{modelProperty}})
+        }
+
+    var recyclerItemsViewModel = mutableListOf<{{model}}ItemViewModel>()
+        private set
+
+    fun getAvailable{{model}}Async() = background {
+        Timber.d("HomeViewModel_TAG: getAvailable{{model}}Async: ")
+        repository.getAvailable{{model}}Async().runOnResult {
+            when (this) {
+                is RepositoryResponse.Error -> Timber.d("HomeViewModel_TAG: getAvailable{{model}}Async: error: $error")
+                is RepositoryResponse.Ok -> {{modelProperty}} = result
+            }
+        }
+    }
+}

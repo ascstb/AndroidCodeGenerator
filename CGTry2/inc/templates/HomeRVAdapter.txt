@@ -1,0 +1,20 @@
+﻿package {{packageName}}.presentation.home
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import {{packageName}}.databinding.{{model}}ItemLayoutBinding
+import {{packageName}}.model.{{model}}
+import {{packageName}}.presentation.base.BaseRVAdapter
+
+class RV{{model}}Adapter (
+    listener: (View, {{model}}) -> Unit
+) : BaseRVAdapter<{{model}}, {{model}}ItemViewModel, {{model}}ItemLayoutBinding>(listener) {
+    override fun inflateDataBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): {{model}}ItemLayoutBinding =
+        {{model}}ItemLayoutBinding.inflate(inflater, container, false)
+
+    override fun getBindItem(itemViewModel: {{model}}ItemViewModel): {{model}}? = itemViewModel.{{modelItemProperty}}
+}

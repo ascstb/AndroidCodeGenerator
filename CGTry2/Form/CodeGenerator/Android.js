@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#txtAppName, #txtPackageName").blur(function () {
+    $("#txtAppName, #txtPackageName, #txtBaseUrl").blur(function () {
         if ($(this).val().length == 0) {
             $(this).parent().parent().addClass("has-error");
         } else {
@@ -26,27 +26,28 @@ function validateButton() {
     }
 }
 
-function validForm() {
-    var txtAppName = $("#txtAppName");
-    var txtPackageName = $("#txtPackageName");
-    var rblContentTypeActivities = $("#rblContentTypeActivities");
-    var rblContentTypeFragments = $("#rblContentTypeFragments");
-}
-
 function callAPI() {
     var url = "Android.aspx/GenerateAndroidCode";
+    var dataRepositories = [];
+    $.each($("input[type=checkbox]:checked"), function (key, checkbox) {
+        dataRepositories.push(checkbox.value);
+    });
 
     var params = JSON.stringify({
         appName: $("#txtAppName").val(),
         appPackageName: $("#txtPackageName").val(),
-        contentTypeActivities: $("#rblContentTypeActivities").prop('checked')
+        contentTypeActivities: $("#rblContentTypeActivities").prop('checked'),
+        dataRepositories: dataRepositories.join(),
+        baseUrl: $("#txtBaseUrl").val(),
+        model: $("#txtModel").val(),
+        jsonString: $("#txtJsonModel").val()
     });
 
     var result = RunAjax(url, params);
 
     if (result == undefined || result == null || result.trim().length == 0) {
-        alert("No Result");
+        swal("No Result");
     } else {
-        alert(result);
+        swal(result);
     }
 }

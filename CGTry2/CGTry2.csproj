@@ -32,6 +32,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Json.Microsoft" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -668,12 +669,19 @@
     <Compile Include="Form\CodeGenerator\Android.aspx.designer.cs">
       <DependentUpon>Android.aspx</DependentUpon>
     </Compile>
+    <Compile Include="helper\CodeGexService.cs" />
+    <Compile Include="helper\ProjectHelper.cs" />
+    <Compile Include="helper\AppHelper.cs" />
+    <Compile Include="helper\MainHelper.cs" />
+    <Compile Include="helper\CodeHelper.cs" />
+    <Compile Include="helper\DataRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="inc\" />
     <Folder Include="inc\master\" />
     <Folder Include="Form\" />
     <Folder Include="Form\CodeGenerator\" />
+    <Folder Include="helper\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="inc\lib\font-awesome-4.7.0\HELP-US-OUT.txt" />
@@ -689,6 +697,33 @@
     <None Include="inc\lib\Inspinia\js\plugins\topojson\LICENSE" />
     <None Include="inc\lib\Inspinia\js\plugins\d3\LICENSE" />
     <None Include="inc\lib\Inspinia\js\plugins\justified-gallery\README.md" />
+    <None Include="inc\templates\Session.txt" />
+    <None Include="inc\templates\BaseFragmentListener.txt" />
+    <None Include="inc\templates\ActivityNavigation.txt" />
+    <None Include="inc\templates\Manifest.txt" />
+    <None Include="inc\templates\HomeViewModel.txt" />
+    <None Include="inc\templates\DIMyAppModule.txt" />
+    <None Include="inc\templates\DIPresentationModule.txt" />
+    <None Include="inc\templates\DIAPIModule.txt" />
+    <None Include="inc\templates\FragmentNavigationImpl.txt" />
+    <None Include="inc\templates\ProjectGradle.txt" />
+    <None Include="inc\templates\BaseViewModel.txt" />
+    <None Include="inc\templates\HomeRVAdapter.txt" />
+    <None Include="inc\templates\MyApp.txt" />
+    <None Include="inc\templates\BaseFragment.txt" />
+    <None Include="inc\templates\Constants.txt" />
+    <None Include="inc\templates\MainActivity.txt" />
+    <None Include="inc\templates\BaseRVAdapter.txt" />
+    <None Include="inc\templates\AppGradle.txt" />
+    <None Include="inc\templates\HomeItemViewModel.txt" />
+    <None Include="inc\templates\ActivityNavigationImpl.txt" />
+    <None Include="inc\templates\FragmentMainActivity.txt" />
+    <None Include="inc\templates\BaseActivity.txt" />
+    <None Include="inc\templates\BaseSpinnerAdapter.txt" />
+    <None Include="inc\templates\DIServicesModule.txt" />
+    <None Include="inc\templates\HomeFragment.txt" />
+    <None Include="inc\templates\FragmentNavigation.txt" />
+    <None Include="inc\templates\Model.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

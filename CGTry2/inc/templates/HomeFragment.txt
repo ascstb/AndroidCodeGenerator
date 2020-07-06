@@ -1,0 +1,62 @@
+﻿package {{packageName}}.presentation.home
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.library.baseAdapters.BR
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import {{packageName}}.core.Session
+import {{packageName}}.databinding.FragmentHomeBinding
+import {{packageName}}.model.{{model}}
+import {{packageName}}.presentation.base.BaseFragment
+import {{packageName}}.presentation.base.BaseFragmentListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
+
+class HomeFragment : BaseFragment<BaseFragmentListener, HomeViewModel, FragmentHomeBinding>() {
+    private val viewModel by viewModel<HomeViewModel>()
+    private lateinit var rvAdapter: RV{{model}}Adapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vm = viewModel
+
+        vm.onPropertyChanged(BR.{{modelProperty}}) {
+            Timber.d("HomeFragment_TAG: onCreate: On {{modelProperty}}Changed: ${vm.{{modelProperty}}.size}")
+            rvAdapter.itemList = viewModel.recyclerItemsViewModel
+        }
+    }
+
+    override fun inflateDataBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding =
+        FragmentHomeBinding.inflate(inflater, container, false)
+
+    override fun onResume() {
+        super.onResume()
+        initRecyclerView
+        vm.getLatestMangaAsync()
+    }
+
+    private fun initRecyclerView() {
+        rvAdapter = RV{{model}}Adapter { _, model -> on{{model}}Clicked(model)}
+
+        binding?.rv?.apply {
+            layoutManager = GridLayoutManager(context, Session.columnsToDisplay)
+            adapter = rvAdapter
+        }
+
+        rvAdapter.itemList = viewModel.recyclerItemsViewModel
+    }
+
+    private fun on{{model}}Clicked(model: {{model}}) {
+        Timber.d("HomeFragment_TAG: on{{model}}Clicked: ${model}")
+        listener?.onClicked(
+            fromFragment = this,
+            extras = Bundle().apply {
+                putParcelable(MANGA_DATA, manga)
+            })
+    }
+}

@@ -16,6 +16,7 @@
     <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/style.css" rel="stylesheet" />
     <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/plugins/toastr/toastr.min.css" rel="stylesheet" />
     <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+    <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/css/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 
     <link href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/css/EstiloGeneral.css" rel="stylesheet" />
 
@@ -27,6 +28,7 @@
     <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/inspinia.js"></script>
     <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/pace/pace.min.js"></script>
     <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/lib/Inspinia/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/js/handlebars-v4.0.5.js"></script>
     <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/js/Util.js"></script>
 
