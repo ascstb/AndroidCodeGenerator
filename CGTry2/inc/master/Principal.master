@@ -33,7 +33,7 @@
     <script src="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"] %>inc/js/Util.js"></script>
 
     <script type="text/javascript">
-        //Navegaci髇
+        //Navegacion
         $(document).ready(function () {
             var UrlActual = window.location.href;
             var Enlaces = $("ul.nav.metismenu li.liMenuItem a");
@@ -102,7 +102,7 @@
             //Pace.stop();
         });
 
-        //Barra de navegaci髇
+        //Barra de navegacion
         $(document).ready(function () {
             $("#btnMinimizarBarraNavegacion").click(function () {
                 BarraNavegacionGuardarEstado();

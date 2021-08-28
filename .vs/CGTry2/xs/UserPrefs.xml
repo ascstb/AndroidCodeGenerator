@@ -1,36 +1,25 @@
 ﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{F1A4EA90-77D5-4D54-93B8-5211A959E2A2}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CGTry2/helper/CodeHelper.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CGTry2/inc/master/Principal.master">
     <Files>
-      <File FileName="CGTry2/helper/CodeHelper.cs" Line="138" Column="1" />
-      <File FileName="CGTry2/helper/CodeGexService.cs" Line="18" Column="1" />
-      <File FileName="CGTry2/Form/CodeGenerator/Android.aspx.cs" Line="47" Column="13" />
-      <File FileName="CGTry2/Form/CodeGenerator/Android.aspx" Line="40" Column="56" />
-      <File FileName="CGTry2/Form/CodeGenerator/Android.js" Line="42" Column="28" />
-      <File FileName="CGTry2/inc/templates/Model.txt" Line="7" Column="22" NotebookId="1" />
+      <File FileName="CGTry2/inc/master/Principal.master" Line="17" Column="65" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CGTry2" expanded="True">
             <Node name="CGTry2" expanded="True">
-              <Node name="References" expanded="True" />
               <Node name="Form" expanded="True">
-                <Node name="CodeGenerator" expanded="True">
-                  <Node name="Android.aspx" expanded="True" />
-                </Node>
+                <Node name="CodeGenerator" expanded="True" />
               </Node>
-              <Node name="helper" expanded="True">
-                <Node name="CodeHelper.cs" selected="True" />
-              </Node>
+              <Node name="helper" expanded="True" />
               <Node name="inc" expanded="True">
-                <Node name="templates" expanded="True" />
+                <Node name="master" expanded="True">
+                  <Node name="Principal.master" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
