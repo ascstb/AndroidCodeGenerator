@@ -265,10 +265,10 @@
                             <a href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
                         </li>
                         <li class="liMenuItem">
-                            <a><i class="fa fa-th-large"></i><span class="nav-label">Operations</span> <span class="fa arrow"></span></a>
+                            <a><i class="fa fa-android"></i><span class="nav-label">Android</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li><a href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>Form/CodeGenerator/Android.aspx">Android Code Generator</a></li>
-
+                                <li><a href="<%= System.Configuration.ConfigurationManager.AppSettings["UrlPrincipal"].ToString() %>Form/CodeGenerator/AndroidProject/GeneralStructure/GeneralStructure.aspx">General Structure</a></li>
                             </ul>
                         </li>
                     </ul>

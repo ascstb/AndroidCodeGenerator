@@ -34,7 +34,7 @@ namespace CGTry2.helper
         {
             var ProjectPath = ProjectHelper.GenerateFiles(RootPath, TemplatesPath, AppName);
             var AppPath = AppHelper.GenerateFiles(ProjectPath, TemplatesPath, PackageName, AppName, BaseUrl);
-            var MainPath = MainHelper.GenerateFiles(AppPath, TemplatesPath, PackageName);
+            var MainPath = MainHelper.GenerateFiles(AppPath, TemplatesPath, PackageName, AppName);
             var CodeRootPath = CodeHelper.GenerateFiles(MainPath, TemplatesPath, PackageName, !Activities, Model, JsonString);
         }
     }

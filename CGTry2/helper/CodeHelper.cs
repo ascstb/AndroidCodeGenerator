@@ -16,7 +16,7 @@ namespace CGTry2.helper
             GenerateModel(CodeRootPath, TemplatesPath, PackageName, Model, JsonString);
             var PresentationPath = GeneratePresentation(CodeRootPath, TemplatesPath, PackageName);
             GenerateNavigation(PresentationPath, TemplatesPath, PackageName, UseFragments);
-            
+
             return CodeRootPath;
         }
 
@@ -140,7 +140,7 @@ namespace CGTry2.helper
 
                 List<string> properties = new List<string>();
 
-                if(jsonObject.GetType() == typeof(System.Object[]))
+                if (jsonObject.GetType() == typeof(System.Object[]))
                 {
                     //This is a list
                     var list = (jsonObject as Object[]);
@@ -375,6 +375,33 @@ namespace CGTry2.helper
             var UtilsPath = Path.Combine(RootPath, "utils");
             if (!Directory.Exists(UtilsPath))
                 Directory.CreateDirectory(UtilsPath);
+        }
+
+        private static string Init2(string JavaPath, string PackageName)
+        {
+            var CurrentLevelPath = JavaPath;
+
+            foreach (var Level in PackageName.Split('.'))
+            {
+                var LevelPath = Path.Combine(CurrentLevelPath, Level);
+                if (!Directory.Exists(LevelPath))
+                    Directory.CreateDirectory(LevelPath);
+
+                CurrentLevelPath = LevelPath;
+            }
+
+            return CurrentLevelPath;
+        }
+
+        public static string GenerateFiles2(string MainPath, string PackageName)
+        {
+            var JavaPath = Path.Combine(MainPath, "java");
+            if (!Directory.Exists(JavaPath))
+                Directory.CreateDirectory(JavaPath);
+
+            var CodeRootPath = Init2(JavaPath, PackageName);
+
+            return CodeRootPath;
         }
     }
 }

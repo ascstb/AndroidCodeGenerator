@@ -5,10 +5,10 @@ namespace CGTry2.helper
 {
     public static class MainHelper
     {
-        public static string GenerateFiles(string AppPath, string TemplatesPath, string PackageName)
+        public static string GenerateFiles(string AppPath, string TemplatesPath, string PackageName, string AppName)
         {
             var MainPath = Init(AppPath);
-            GenerateManifest(MainPath, TemplatesPath, PackageName);
+            GenerateManifest(MainPath, TemplatesPath, PackageName, AppName);
             return MainPath;
         }
 
@@ -25,13 +25,14 @@ namespace CGTry2.helper
             return MainPath;
         }
 
-        private static void GenerateManifest(string MainPath, string TemplatesPath, string PackageName)
+        private static void GenerateManifest(string MainPath, string TemplatesPath, string PackageName, string AppName)
         {
             var ManifestFilePath = Path.Combine(MainPath, "Android.Manifest.xml");
             var TemplateManifestFilePath = Path.Combine(TemplatesPath, "Manifest.txt");
 
             var Manifest = File.ReadAllText(TemplateManifestFilePath)
-                .Replace("{{packageName}}", PackageName);
+                .Replace("{{packageName}}", PackageName)
+                .Replace("{{appName}}", AppName);
 
             File.WriteAllText(ManifestFilePath, Manifest);
         }

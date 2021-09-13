@@ -1,7 +1,7 @@
 ﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{F1A4EA90-77D5-4D54-93B8-5211A959E2A2}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CGTry2/inc/master/Principal.master">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="CGTry2/inc/master/Principal.master" Line="17" Column="65" />
+      <File FileName="CGTry2/Form/CodeGenerator/AndroidProject/GeneralStructure/GeneralStructure.aspx.cs" Line="16" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -9,17 +9,22 @@
           <Node name="CGTry2" expanded="True">
             <Node name="CGTry2" expanded="True">
               <Node name="Form" expanded="True">
-                <Node name="CodeGenerator" expanded="True" />
-              </Node>
-              <Node name="helper" expanded="True" />
-              <Node name="inc" expanded="True">
-                <Node name="master" expanded="True">
-                  <Node name="Principal.master" selected="True" />
+                <Node name="CodeGenerator" expanded="True">
+                  <Node name="AndroidProject" expanded="True">
+                    <Node name="GeneralStructure" expanded="True">
+                      <Node name="GeneralStructure.aspx.cs" selected="True" />
+                    </Node>
+                  </Node>
                 </Node>
               </Node>
+              <Node name="helper" expanded="True" />
+              <Node name="inc" expanded="True" />
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

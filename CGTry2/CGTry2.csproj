@@ -646,6 +646,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Form\CodeGenerator\Android.aspx" />
     <Content Include="Form\CodeGenerator\Android.js" />
+    <Content Include="Form\CodeGenerator\AndroidProject\GeneralStructure\GeneralStructure.js" />
+    <Content Include="Form\CodeGenerator\AndroidProject\GeneralStructure\GeneralStructure.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -675,6 +677,11 @@
     <Compile Include="helper\MainHelper.cs" />
     <Compile Include="helper\CodeHelper.cs" />
     <Compile Include="helper\DataRepository.cs" />
+    <Compile Include="Form\CodeGenerator\AndroidProject\GeneralStructure\GeneralStructure.aspx.designer.cs" />
+    <Compile Include="Form\CodeGenerator\AndroidProject\GeneralStructure\GeneralStructure.aspx.cs" />
+    <Compile Include="helper\ResourceHelper.cs" />
+    <Compile Include="helper\CoreHelper.cs" />
+    <Compile Include="helper\DIHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="inc\" />
@@ -682,6 +689,8 @@
     <Folder Include="Form\" />
     <Folder Include="Form\CodeGenerator\" />
     <Folder Include="helper\" />
+    <Folder Include="Form\CodeGenerator\AndroidProject\" />
+    <Folder Include="Form\CodeGenerator\AndroidProject\GeneralStructure\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="inc\lib\font-awesome-4.7.0\HELP-US-OUT.txt" />

@@ -16,7 +16,7 @@ namespace CGTry2.helper
             return AppPath;
         }
 
-        private static string Init(string ProjectPath)
+        public static string Init(string ProjectPath)
         {
             var AppPath = Path.Combine(ProjectPath, "app");
 
@@ -26,7 +26,7 @@ namespace CGTry2.helper
             return AppPath;
         }
 
-        private static void GenerateGradle(string AppPath, string TemplatesPath, string PackageName, string AppName)
+        public static void GenerateGradle(string AppPath, string TemplatesPath, string PackageName, string AppName)
         {
             var AppGradleFilePath = Path.Combine(AppPath, "build.gradle");
             var TemplateAppGradleFilePath = Path.Combine(TemplatesPath, "AppGradle.txt");
@@ -40,7 +40,7 @@ namespace CGTry2.helper
             File.WriteAllText(AppGradleFilePath, AppGradle);
         }
 
-        private static void GenerateConfig(string AppPath, string BaseUrl)
+        public static void GenerateConfig(string AppPath, string BaseUrl)
         {
             var ConfigPath = Path.Combine(AppPath, "config");
             if (!Directory.Exists(ConfigPath))

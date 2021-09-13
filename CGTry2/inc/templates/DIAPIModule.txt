@@ -18,15 +18,20 @@ fun createOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
     .readTimeout(120, TimeUnit.SECONDS)
     .build()
 
-inline fun <reified T> createWebService(okHttpClient: OkHttpClient, url: String): T =
+/**
+ * Helper function to create a Retrofit service using the built-in suspend support for coroutines
+ * from Retrofit 2.6.0 and newer versions
+ *
+ * @param okHttpClient The HTTP client used by Retrofit for requests
+ * @param url The base URL used by Retrofit for requests
+ */
+inline fun <reified T> createRetrofitWebService(okHttpClient: OkHttpClient, url: String): T =
     Retrofit.Builder()
         .baseUrl(url)
         .client(okHttpClient)
-        .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
         .create(T::class.java)
-
 
 private val logLevel =
     if (!BuildConfig.DEBUG) HttpLoggingInterceptor.Level.NONE
