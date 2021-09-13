@@ -1,0 +1,133 @@
+package {{packageName}}.presentation.navigation
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import {{packageName}}.MainActivity
+import {{packageName}}.presentation.splash.SplashActivity
+import timber.log.Timber
+
+class NavigationImpl : Navigation {
+    override fun goBack(fromActivity: AppCompatActivity, defaultBehavior: () -> Unit) {
+        try {
+            Timber.d("NavigationImpl_TAG: goBack: from: ${fromActivity::class.simpleName}")
+
+            //region validate No Return Activity
+            val noReturn = noReturnActivity.find { fromActivity::class.java == it }
+            if (noReturn != null) return
+            //endregion
+
+            //region get Previous Activity or default behavior
+            val toActivity = getPreviousScreen(fromActivity)
+            if (toActivity == null) {
+                defaultBehavior()
+                return
+            }
+            //endregion
+
+            navigate(fromActivity, toActivity)
+        } catch (e: Exception) {
+            Timber.d("NavigationImpl_TAG: goBack: exception: $e")
+        }
+    }
+
+    override fun goHome(fromActivity: AppCompatActivity, extras: Bundle?) {
+        try {
+            Timber.d("NavigationImpl_TAG: goHome: from: ${fromActivity::class.simpleName}, extras: $extras")
+            if (fromActivity::class.java == MainActivity::class.java) return
+            navigate(fromActivity, MainActivity::class.java)
+        } catch (e: Exception) {
+            Timber.d("NavigationImpl_TAG: goHome: exception: $e")
+        }
+    }
+
+    override fun goToSplash(fromActivity: AppCompatActivity, extras: Bundle?) {
+        try {
+            Timber.d("NavigationImpl_TAG: goToSplash: from: ${fromActivity::class.simpleName}, extras: $extras")
+            navigate(fromActivity, SplashActivity::class.java)
+        } catch (e: Exception) {
+            Timber.d("NavigationImpl_TAG: goHome: exception: $e")
+        }
+    }
+
+    override fun goTo(
+        fromActivity: AppCompatActivity,
+        to: NavigationRoute,
+        extras: Bundle?
+    ) {
+        try {
+            Timber.d("NavigationImpl_TAG: goTo: from: ${fromActivity::class.simpleName}, to: $to, extras: $extras")
+            val toActivity = getClassFromLink(to.innerLink) ?: return
+
+            navigate(fromActivity, toActivity, extras)
+        } catch (e: Exception) {
+            Timber.d("NavigationImpl_TAG: goTo: exception: $e")
+        }
+    }
+
+    override fun goToLink(context: Context, link: String, extras: Bundle?) {
+        Timber.d("NavigationImpl_TAG: goToLink: $link")
+        try {
+            val innerScreen = NavigationRoute.getByInnerLink(link)
+
+            //region Check / Open third party app if applies
+            if (innerScreen == NavigationRoute.NOT_FOUND) {
+                val intent =
+                    context.packageManager.getLaunchIntentForPackage(link) ?: return
+                extras?.let { intent.putExtras(it) }
+                context.startActivity(intent)
+                return
+            }
+            //endregion
+
+            val goToScreen = getClassFromLink(link) ?: return
+
+            navigate(context, goToScreen, extras)
+
+        } catch (e: Exception) {
+            Timber.d("NavigationImpl_TAG: goToLink: exception: ${e.message}")
+        }
+    }
+
+    private fun getClassFromLink(link: String): Class<*>? {
+        return when (link) {
+            NavigationRoute.SPLASH_SCREEN.innerLink -> SplashActivity::class.java
+            NavigationRoute.HOME.innerLink -> MainActivity::class.java
+            else -> null
+        }
+    }
+
+    private fun <T> navigate(
+        context: Context,
+        view: Class<T>,
+        extras: Bundle? = null
+    ) {
+        try {
+            Timber.d("NavigationImpl_TAG: navigate: $context , view: $view")
+            val intent = Intent(context, view)
+            if (extras != null) {
+                intent.putExtras(extras)
+            }
+
+            if (view == MainActivity::class.java) {
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Timber.d("NavigationImpl_TAG: navigate: exception: $e")
+        }
+    }
+
+    private fun getPreviousScreen(fromActivity: AppCompatActivity): Class<*>? =
+        when (fromActivity::class) {
+
+            else -> null
+        }
+
+    private val noReturnActivity = listOf<Class<*>>(
+        SplashActivity::class.java,
+        MainActivity::class.java
+    )
+}

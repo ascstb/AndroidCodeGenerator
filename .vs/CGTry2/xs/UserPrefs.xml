@@ -1,7 +1,8 @@
 ﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{F1A4EA90-77D5-4D54-93B8-5211A959E2A2}|">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="CGTry2/helper/SplashHelper.cs">
     <Files>
-      <File FileName="CGTry2/Form/CodeGenerator/AndroidProject/GeneralStructure/GeneralStructure.aspx.cs" Line="16" Column="10" />
+      <File FileName="CGTry2/Form/CodeGenerator/AndroidProject/GeneralStructure/GeneralStructure.aspx.cs" Line="35" Column="114" NotebookId="3" />
+      <File FileName="CGTry2/helper/SplashHelper.cs" Line="11" Column="1" NotebookId="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,13 +12,13 @@
               <Node name="Form" expanded="True">
                 <Node name="CodeGenerator" expanded="True">
                   <Node name="AndroidProject" expanded="True">
-                    <Node name="GeneralStructure" expanded="True">
-                      <Node name="GeneralStructure.aspx.cs" selected="True" />
-                    </Node>
+                    <Node name="GeneralStructure" expanded="True" />
                   </Node>
                 </Node>
               </Node>
-              <Node name="helper" expanded="True" />
+              <Node name="helper" expanded="True">
+                <Node name="SplashHelper.cs" selected="True" />
+              </Node>
               <Node name="inc" expanded="True" />
             </Node>
           </Node>
@@ -34,7 +35,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/arturosanchez/Desktop/Project/Freelance/VS/CGTry2/AndroidCodeGenerator/CGTry2/inc/templates/Model.txt" relfile="CGTry2/inc/templates/Model.txt" line="9" column="1" />
-      <Breakpoint file="/Users/arturosanchez/Desktop/Project/Freelance/VS/CGTry2/AndroidCodeGenerator/CGTry2/helper/CodeHelper.cs" relfile="CGTry2/helper/CodeHelper.cs" line="180" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

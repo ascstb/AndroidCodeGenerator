@@ -1,12 +1,12 @@
-﻿package {{packageName}}.presentation.base
+package com.r2devpros.mytestapp.presentation.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
-import {{packageName}}.R
-import {{packageName}}.presentation.navigation.Navigation
+import com.r2devpros.mytestapp.R
+import com.r2devpros.mytestapp.presentation.navigation.Navigation
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 import java.util.*

@@ -1,0 +1,13 @@
+﻿package {{packageName}}.di
+
+import {{packageName}}.presentation.navigation.Navigation
+import {{packageName}}.presentation.navigation.NavigationImpl
+import org.koin.dsl.module
+
+val navigationModule = module {
+    single<Navigation> { NavigationImpl() }
+}
+
+val navigationModules = listOf(
+    navigationModule
+)

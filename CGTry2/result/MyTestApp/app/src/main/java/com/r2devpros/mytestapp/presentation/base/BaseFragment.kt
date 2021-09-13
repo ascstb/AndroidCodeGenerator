@@ -1,4 +1,4 @@
-﻿package {{packageName}}.presentation.base
+package com.r2devpros.mytestapp.presentation.base
 
 import android.content.Context
 import android.os.Bundle

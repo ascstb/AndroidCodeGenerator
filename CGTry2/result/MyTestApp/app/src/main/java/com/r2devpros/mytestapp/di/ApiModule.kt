@@ -1,6 +1,6 @@
-﻿package {{packageName}}.di
+package com.r2devpros.mytestapp.di
 
-import {{packageName}}.BuildConfig
+import com.r2devpros.mytestapp.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module

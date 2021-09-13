@@ -682,6 +682,12 @@
     <Compile Include="helper\ResourceHelper.cs" />
     <Compile Include="helper\CoreHelper.cs" />
     <Compile Include="helper\DIHelper.cs" />
+    <Compile Include="helper\PermissionsHelper.cs" />
+    <Compile Include="helper\PresentationHelper.cs" />
+    <Compile Include="helper\BaseHelper.cs" />
+    <Compile Include="helper\Utils.cs" />
+    <Compile Include="helper\NavigationHelper.cs" />
+    <Compile Include="helper\SplashHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="inc\" />

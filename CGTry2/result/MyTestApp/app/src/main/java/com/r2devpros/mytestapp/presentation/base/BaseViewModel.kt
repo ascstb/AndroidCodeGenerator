@@ -1,4 +1,4 @@
-﻿package {{packageName}}.presentation.base
+package com.r2devpros.mytestapp.presentation.base
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
